@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Manual do Geometric Time Lab Simulator 2026 V1</title>
+<style>
+:root{
+  --bg:#040814;
+  --bg2:#0a1328;
+  --panel:rgba(9,15,30,0.82);
+  --line:rgba(56,217,245,0.18);
+  --cyan:#38d9f5;
+  --gold:#f9c74f;
+  --violet:#b896ff;
+  --text:#eef2ff;
+  --muted:rgba(226,232,255,0.72);
+  --mono:"JetBrains Mono","Fira Code","Consolas",monospace;
+  --sans:Inter,Segoe UI,Arial,sans-serif;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;
+  font-family:var(--sans);
+  color:var(--text);
+  background:
+    radial-gradient(circle at top left,rgba(184,150,255,0.16),transparent 28%),
+    radial-gradient(circle at top right,rgba(56,217,245,0.12),transparent 30%),
+    linear-gradient(180deg,var(--bg2),var(--bg));
+}
+a{color:inherit}
+.manual-shell{
+  width:min(1180px,calc(100vw - 32px));
+  margin:0 auto;
+  padding:92px 0 64px;
+}
+.manual-topbar{
+  position:fixed;top:18px;right:18px;z-index:20;
+  display:flex;gap:10px;flex-wrap:wrap;justify-content:flex-end;
+}
+.manual-pill{
+  display:inline-flex;align-items:center;justify-content:center;
+  padding:0.62rem 1rem;border-radius:999px;text-decoration:none;
+  border:1px solid var(--line);
+  background:linear-gradient(180deg,rgba(8,14,28,0.94),rgba(5,10,20,0.88));
+  color:var(--text);
+  font-family:var(--mono);font-size:0.68rem;letter-spacing:0.14em;text-transform:uppercase;
+  box-shadow:0 14px 34px rgba(0,0,0,0.28),inset 0 1px 0 rgba(255,255,255,0.04);
+}
+.manual-pill:hover{border-color:rgba(249,199,79,0.36);color:var(--gold)}
+.manual-hero{
+  padding:36px 32px 30px;
+  border:1px solid var(--line);
+  border-radius:28px;
+  background:
+    radial-gradient(circle at top right,rgba(184,150,255,0.10),transparent 34%),
+    linear-gradient(180deg,rgba(11,18,34,0.94),rgba(6,11,22,0.90));
+  box-shadow:0 24px 70px rgba(0,0,0,0.32),inset 0 1px 0 rgba(255,255,255,0.04);
+}
+.manual-kicker{
+  font-family:var(--mono);font-size:0.7rem;letter-spacing:0.2em;text-transform:uppercase;
+  color:rgba(56,217,245,0.66);margin-bottom:0.8rem;
+}
+.manual-hero h1{
+  margin:0;
+  font-size:clamp(2rem,4vw,3.6rem);
+  line-height:1.05;
+  letter-spacing:-0.03em;
+}
+.manual-hero p{
+  max-width:880px;
+  margin:1rem 0 0;
+  font-size:1rem;line-height:1.9;color:var(--muted);
+}
+.manual-meta{
+  display:inline-flex;align-items:center;justify-content:center;
+  margin-top:1rem;padding:0.44rem 0.82rem;border-radius:999px;
+  border:1px solid rgba(56,217,245,0.16);
+  background:linear-gradient(180deg,rgba(8,14,28,0.78),rgba(6,11,22,0.72));
+  color:rgba(249,199,79,0.82);
+  font-family:var(--mono);font-size:0.64rem;letter-spacing:0.16em;text-transform:uppercase;
+}
+.manual-grid{
+  display:grid;
+  grid-template-columns:280px minmax(0,1fr);
+  gap:18px;
+  margin-top:20px;
+}
+.manual-nav,.manual-content{
+  border:1px solid var(--line);
+  border-radius:24px;
+  background:var(--panel);
+  box-shadow:0 18px 48px rgba(0,0,0,0.24),inset 0 1px 0 rgba(255,255,255,0.03);
+}
+.manual-nav{
+  position:sticky;top:88px;
+  align-self:start;
+  padding:18px;
+}
+.manual-nav h2{
+  margin:0 0 14px;
+  font-family:var(--mono);font-size:0.76rem;letter-spacing:0.18em;text-transform:uppercase;
+  color:var(--gold);
+}
+.manual-nav a{
+  display:block;
+  padding:10px 12px;
+  border-radius:14px;
+  text-decoration:none;
+  color:var(--muted);
+  font-size:0.9rem;
+  line-height:1.5;
+}
+.manual-nav a:hover{
+  background:rgba(56,217,245,0.08);
+  color:var(--text);
+}
+.manual-content{
+  padding:18px;
+  display:grid;
+  gap:16px;
+}
+.manual-card{
+  padding:20px 22px;
+  border-radius:18px;
+  border:1px solid rgba(56,217,245,0.10);
+  background:rgba(255,255,255,0.015);
+}
+.manual-card h3{
+  margin:0 0 0.85rem;
+  font-family:var(--mono);font-size:0.78rem;letter-spacing:0.18em;text-transform:uppercase;
+  color:var(--cyan);
+}
+.manual-card p,.manual-card li{
+  font-size:0.95rem;
+  line-height:1.9;
+  color:var(--muted);
+}
+.manual-card ul{
+  margin:0;
+  padding-left:1.2rem;
+  display:grid;
+  gap:0.45rem;
+}
+.manual-glossary{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:12px;
+}
+.manual-glossary div{
+  padding:14px 15px;
+  border-radius:16px;
+  border:1px solid rgba(56,217,245,0.08);
+  background:rgba(255,255,255,0.018);
+}
+.manual-glossary strong{
+  display:block;
+  font-family:var(--mono);font-size:0.68rem;letter-spacing:0.16em;text-transform:uppercase;
+  color:var(--gold);margin-bottom:0.45rem;
+}
+.manual-footer{
+  margin-top:18px;
+  padding:0 4px;
+  font-size:0.82rem;line-height:1.8;color:rgba(226,232,255,0.56);
+  text-align:center;
+}
+.manual-footer a{
+  color:inherit;text-decoration:none;border-bottom:1px solid transparent;
+}
+.manual-footer a:hover{
+  color:var(--gold);border-bottom-color:rgba(249,199,79,0.34);
+}
+@media (max-width:980px){
+  .manual-grid{grid-template-columns:1fr}
+  .manual-nav{position:static}
+  .manual-glossary{grid-template-columns:1fr}
+}
+@media (max-width:640px){
+  .manual-shell{width:min(100vw - 16px,1180px);padding-top:88px}
+  .manual-topbar{left:8px;right:8px;top:8px;justify-content:stretch}
+  .manual-pill{width:100%}
+  .manual-hero,.manual-nav,.manual-content{border-radius:20px}
+  .manual-hero,.manual-content,.manual-nav{padding-left:16px;padding-right:16px}
+}
+</style>
+</head>
+<body>
+  <div class="manual-topbar">
+    <a class="manual-pill" href="./geometric-time-lab-simulator-2026.html" title="Voltar para a homepage da GTLS">← Voltar para GTLS</a>
+    <a class="manual-pill" href="./cronosfera-fractal-melhorado.html" title="Abrir a homepage principal da Cronosfera">Cronosfera</a>
+    <a class="manual-pill" href="./ecosistema-cronosfera-2026.html" title="Abrir o portal institucional do ecossistema">Ecossistema</a>
+  </div>
+
+  <div class="manual-shell">
+    <section class="manual-hero">
+      <div class="manual-kicker">GEOMETRIC TIME LAB / ECOSSISTEMA CRONOSFERA</div>
+      <h1>MANUAL DO GEOMETRIC TIME LAB SIMULATOR 2026 V1</h1>
+      <div class="manual-meta">Documentacao tecnica / laboratorio vinculado</div>
+      <p>Documento técnico, interpretativo e operacional. Esta página apresenta a finalidade do laboratório, a forma correta de leitura da interface, os limites epistemológicos do ambiente e a relação arquitetural entre a GTLS e a Cronosfera.</p>
+    </section>
+
+    <div class="manual-grid">
+      <aside class="manual-nav">
+        <h2>Navegação</h2>
+        <a href="#apresentacao">Apresentação da GTLS</a>
+        <a href="#finalidade">Finalidade do laboratório</a>
+        <a href="#visao">Visão conceitual</a>
+        <a href="#interface">Como ler a interface</a>
+        <a href="#controles">Como usar os controles</a>
+        <a href="#modulos">Como interpretar os módulos</a>
+        <a href="#limites">Limites epistemológicos</a>
+        <a href="#glossario">Glossário</a>
+        <a href="#relacao">Relação entre GTLS e Cronosfera</a>
+        <a href="#taxonomia">Taxonomia do ecossistema</a>
+        <a href="#matriz">Matriz comparativa</a>
+        <a href="#dialogo">Como os projetos dialogam</a>
+        <a href="#glossario-ecossistema">Glossário comum</a>
+        <a href="#conclusao">Conclusão</a>
+      </aside>
+
+      <main class="manual-content">
+        <section id="apresentacao" class="manual-card">
+          <h3>Apresentação da GTLS</h3>
+          <p>A Geometric Time Lab Simulator 2026 é um laboratório geométrico-temporal independente, desenhado para investigar como relações espaciais, estruturais, causais e oscilatórias podem ser observadas em um ambiente técnico unificado. Seu papel não é substituir a Cronosfera, mas aprofundar uma camada específica de análise experimental em que forma, coerência, curvatura e emergência temporal possam ser examinadas com maior granularidade.</p>
+        </section>
+
+        <section id="finalidade" class="manual-card">
+          <h3>Finalidade do laboratório</h3>
+          <p>A GTLS existe para operar como bancada especializada do ecossistema. Enquanto a Cronosfera organiza leituras mais amplas do campo temporal e de seus regimes macro, a GTLS explora a escala micro-geométrica e relacional. Sua utilidade prática está em permitir comparação entre estados, observação de transições, inspeção de coerências internas e teste de hipóteses visuais-operacionais sem comprometer a estabilidade da homepage principal.</p>
+        </section>
+
+        <section id="visao" class="manual-card">
+          <h3>Visão conceitual</h3>
+          <p>A GTLS deve ser lida como um instrumento de observação geométrico-temporal. Seu foco não recai apenas sobre valores, mas sobre relações entre coerência, distribuição, curvatura, sincronização e estabilidade. Em vez de prometer respostas automáticas, a página oferece um ambiente técnico para reconhecer regimes, contrastar estados e testar leituras de forma comparativa, disciplinada e experimental.</p>
+        </section>
+
+        <section id="interface" class="manual-card">
+          <h3>Como ler a interface</h3>
+          <ul>
+            <li>Comece sempre pelo painel principal e pelo canvas dominante antes de interpretar indicadores isolados.</li>
+            <li>Observe relações entre forma, intensidade, distribuição, coerência e variação ao longo da interface.</li>
+            <li>Cruze a leitura visual com HUDs, gráficos e valores auxiliares; a interface foi desenhada para leitura composta.</li>
+            <li>Leia o conjunto antes do detalhe: regimes e transições costumam ser mais reveladores que valores únicos.</li>
+          </ul>
+        </section>
+
+        <section id="controles" class="manual-card">
+          <h3>Como usar os controles</h3>
+          <ul>
+            <li>Aguarde a estabilização inicial da página após a abertura local do arquivo.</li>
+            <li>Use os controles e presets para comparar estados em vez de fixar a leitura em um único instante.</li>
+            <li>Observe como cada módulo responde às mudanças: alguns indicam forma, outros coerência, outros regime.</li>
+            <li>Formule interpretações apenas depois de acumular mais de um sinal convergente.</li>
+          </ul>
+        </section>
+
+        <section id="modulos" class="manual-card">
+          <h3>Como interpretar os módulos</h3>
+          <p>Os módulos devem ser lidos como lentes complementares. Painéis geométricos mostram disposição e estrutura; indicadores temporais mostram ritmo, fase e sincronização; módulos de validação e diagnóstico ajudam a distinguir estabilidade operacional de ruído interpretativo. Nenhum bloco basta sozinho. O valor do laboratório aparece quando a leitura se torna comparativa, relacional e cumulativa.</p>
+          <ul>
+            <li>O painel principal e os canvases centrais mostram a geometria viva do laboratório e devem ser lidos primeiro.</li>
+            <li>HUDs e indicadores numéricos funcionam como tradução métrica do que a visualização já sugere.</li>
+            <li>Módulos auxiliares de validação, diagnóstico e coerência ajudam a separar estabilidade estrutural de flutuação momentânea.</li>
+            <li>O modo correto de consulta cruza forma, valor, tendência e resposta dos módulos antes de concluir.</li>
+          </ul>
+        </section>
+
+        <section id="limites" class="manual-card">
+          <h3>Limites epistemológicos</h3>
+          <p>A GTLS é um software funcional e sofisticado, mas a coerência interna de seus módulos não equivale automaticamente a validação empírica externa. O laboratório deve ser lido com prudência: módulos experimentais permanecem exploratórios, símbolos não devem ser tratados como sentenças finais e a interpretação madura distingue claramente motor computacional, visualização analítica e hipótese operacional.</p>
+        </section>
+
+        <section id="glossario" class="manual-card">
+          <h3>Glossário</h3>
+          <div class="manual-glossary">
+            <div><strong>Regime</strong>Configuração dominante assumida pelo sistema em determinado intervalo.</div>
+            <div><strong>Fase</strong>Posição relativa de um estado dentro de um ciclo ou oscilação.</div>
+            <div><strong>Sincronização</strong>Grau de alinhamento entre ritmos, módulos ou osciladores.</div>
+            <div><strong>Convergência</strong>Coincidência entre múltiplos sinais apontando para a mesma leitura.</div>
+            <div><strong>Atrator</strong>Polo organizador que tende a orientar trajetórias e distribuições.</div>
+            <div><strong>Curvatura</strong>Expressão de inflexão e mudança de regime no comportamento observado.</div>
+            <div><strong>Recorrência</strong>Retorno parcial de padrões ou relações ao longo do tempo.</div>
+            <div><strong>Validação</strong>Checagem de consistência e robustez interna dos módulos.</div>
+          </div>
+        </section>
+
+        <section id="relacao" class="manual-card">
+          <h3>Relação entre GTLS e Cronosfera</h3>
+          <p>A Cronosfera permanece como núcleo principal do projeto. A GTLS funciona como laboratório vinculado, com engine autônoma e arquitetura separada por escolha deliberada. Ambos pertencem ao mesmo ecossistema, mas ainda não compartilham engine nem sincronização matemática cruzada. Essa separação evita mistura prematura de motores, reduz risco de regressão estrutural e permite que cada página amadureça em seu próprio ritmo. Integrações futuras devem ocorrer por protocolo leve, comparação de estados ou camadas documentadas, nunca por fusão apressada. O protocolo de ponte futura do ecossistema está concentrado no portal institucional.</p>
+        </section>
+
+        <section id="taxonomia" class="manual-card">
+          <h3>Taxonomia do ecossistema</h3>
+          <p>No vocabulário institucional comum, a Cronosfera ocupa o papel de núcleo principal; a GTLS, o de laboratório vinculado. Leitura temporal, modelagem geométrico-temporal, módulo analítico, módulo experimental, validação interna, engine independente, hipótese interpretativa e integração futura formam a gramática compartilhada que organiza o ecossistema sem exigir fusão de arquiteturas.</p>
+        </section>
+
+        <section id="matriz" class="manual-card">
+          <h3>Matriz comparativa dos sistemas</h3>
+          <div class="manual-glossary">
+            <div><strong>Cronosfera</strong>Função principal: leitura temporal complexa. Natureza: núcleo principal. Foco: campo, curvatura, ressonância, convergência e leitura histórica. Interface: painel vivo com camadas simbólicas e analíticas.</div>
+            <div><strong>GTLS</strong>Função principal: laboratório geométrico-temporal. Natureza: ambiente experimental vinculado. Foco: simulação, coerência estrutural, exploração formal e testes operacionais. Interface: homepage independente com documentação própria.</div>
+          </div>
+        </section>
+
+        <section id="dialogo" class="manual-card">
+          <h3>Como os projetos dialogam</h3>
+          <p>Os projetos compartilham linguagem conceitual, horizonte analítico e prudência interpretativa. Ainda não compartilham engine, estado interno ou sincronização matemática cruzada. A separação atual é deliberada: mantém estabilidade, clareza de função e margem segura para integrações futuras progressivas, controladas e arquiteturalmente consistentes.</p>
+        </section>
+
+        <section id="glossario-ecossistema" class="manual-card">
+          <h3>Glossário comum do ecossistema</h3>
+          <div class="manual-glossary">
+            <div><strong>Ecossistema</strong>Conjunto institucional formado pela Cronosfera, pela GTLS e por suas camadas documentais.</div>
+            <div><strong>Engine independente</strong>Arquitetura própria de cada sistema, preservada para evitar regressão estrutural.</div>
+            <div><strong>Interface documental</strong>Camada de orientação que organiza leitura, navegação e compreensão do projeto.</div>
+            <div><strong>Integração futura</strong>Possível aproximação posterior, sempre por protocolo leve e não por fusão prematura.</div>
+          </div>
+        </section>
+
+        <section id="conclusao" class="manual-card">
+          <h3>Conclusão</h3>
+          <p>A GTLS é mais valiosa quando lida como laboratório de observação fina: um ambiente técnico para pensar relações, testar coerências e acompanhar transformações sem precipitação. Em diálogo com a Cronosfera, ela amplia o ecossistema sem perder autonomia, clareza e estabilidade.</p>
+        </section>
+      </main>
+    </div>
+
+    <div class="manual-footer">
+      GEOMETRIC TIME LAB SIMULATOR 2026 · DOCUMENTACAO TECNICA · LABORATORIO VINCULADO ·
+      <a href="./ecosistema-cronosfera-2026.html">Portal do Ecossistema</a> ·
+      <a href="./cronosfera-fractal-melhorado.html">Cronosfera</a> ·
+      <a href="./geometric-time-lab-simulator-2026.html">GTLS</a>
+    </div>
+  </div>
+</body>
+</html>

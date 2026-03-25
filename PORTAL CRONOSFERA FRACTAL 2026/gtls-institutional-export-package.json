@@ -1,0 +1,25 @@
+{
+  "exportPackageId": "manual-workspace-export-stable",
+  "createdAt": "2026-03-25T05:05:00.000Z",
+  "packageStatus": "manual-fallback-export",
+  "sourceScope": "workspace-manual-fallback",
+  "currentStage": "not-available",
+  "lifecycleAction": "not-available",
+  "humanDecisionOutcome": "not-available",
+  "institutionalRecordStatus": "not-available",
+  "historicalVersionCount": 0,
+  "decisionSummary": "not-available",
+  "maturitySummary": "not-available",
+  "monitoringSummary": "not-available",
+  "exportSummary": "Pacote institucional gerado manualmente no workspace porque o download pelo portal nao respondeu no navegador local.",
+  "artifactRefs": [
+    "sourceHtml:C:/Users/david/Documents/New project/ecosistema-cronosfera-2026.html"
+  ],
+  "warnings": [
+    "gerado fora do navegador",
+    "nao inclui o localStorage vivo da sessao do portal",
+    "usar apenas como fallback manual de exportacao"
+  ],
+  "auditNarrative": "Este arquivo foi gerado manualmente no workspace como fallback de exportacao offline, preservando rastreabilidade sobre a origem do artefato e o motivo da emissao.",
+  "auditNotice": "Este pacote e local, offline e auditavel, mas nao representa uma leitura em tempo real do localStorage atual do navegador."
+}

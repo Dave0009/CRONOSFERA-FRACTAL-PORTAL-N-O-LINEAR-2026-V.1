@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Downloads do Handoff</title>
+<style>
+  :root{
+    --bg:#08101d;
+    --panel:#0d1728;
+    --line:#1d3557;
+    --text:#d8e3f0;
+    --muted:#8ea4bf;
+    --accent:#41d9ff;
+    --gold:#ffd24a;
+  }
+  *{box-sizing:border-box}
+  body{
+    margin:0;
+    font-family:Segoe UI,Arial,sans-serif;
+    background:linear-gradient(180deg,#07101c 0%,#0a1424 100%);
+    color:var(--text);
+    min-height:100vh;
+    padding:32px 18px;
+  }
+  .wrap{
+    max-width:980px;
+    margin:0 auto;
+  }
+  h1{
+    margin:0 0 10px;
+    font-size:28px;
+    letter-spacing:.04em;
+    color:var(--gold);
+  }
+  p{
+    margin:0 0 22px;
+    color:var(--muted);
+    line-height:1.5;
+  }
+  .grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+    gap:14px;
+  }
+  .card{
+    background:rgba(13,23,40,.92);
+    border:1px solid rgba(65,217,255,.16);
+    border-radius:16px;
+    padding:16px;
+    box-shadow:0 12px 28px rgba(0,0,0,.22);
+  }
+  .name{
+    font-size:16px;
+    font-weight:700;
+    color:#eef6ff;
+    margin:0 0 6px;
+    word-break:break-word;
+  }
+  .desc{
+    font-size:14px;
+    color:var(--muted);
+    min-height:40px;
+    margin:0 0 14px;
+  }
+  .btn{
+    display:inline-block;
+    text-decoration:none;
+    padding:11px 16px;
+    border-radius:12px;
+    background:linear-gradient(180deg,#56e4ff 0%,#19bfe7 100%);
+    color:#04111c;
+    font-weight:800;
+    letter-spacing:.03em;
+    border:1px solid rgba(255,255,255,.22);
+    box-shadow:0 10px 18px rgba(0,0,0,.18);
+  }
+  .btn:hover{
+    filter:brightness(1.06);
+  }
+  .top{
+    margin-bottom:18px;
+    display:flex;
+    flex-wrap:wrap;
+    gap:12px;
+    align-items:center;
+  }
+  .zip{
+    background:linear-gradient(180deg,#ffe486 0%,#f0bf2d 100%);
+    color:#241600;
+  }
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="top">
+      <h1>Downloads do Handoff</h1>
+      <a class="btn zip" href="../handoff-download.zip" download="handoff-download.zip">Baixar pacote ZIP</a>
+    </div>
+    <p>Abra esta pagina no navegador e clique nos botoes abaixo para baixar os arquivos individualmente ou em pacote.</p>
+
+    <div class="grid">
+      <div class="card">
+        <div class="name">cronosfera-fractal-melhorado.html</div>
+        <p class="desc">Arquivo principal de trabalho do projeto.</p>
+        <a class="btn" href="./cronosfera-fractal-melhorado.html" download="cronosfera-fractal-melhorado.html">Baixar arquivo</a>
+      </div>
+
+      <div class="card">
+        <div class="name">cronosfera-fractal-melhorado-STABLE.html</div>
+        <p class="desc">Snapshot congelado e identico ao estado funcional atual.</p>
+        <a class="btn" href="./cronosfera-fractal-melhorado-STABLE.html" download="cronosfera-fractal-melhorado-STABLE.html">Baixar arquivo</a>
+      </div>
+
+      <div class="card">
+        <div class="name">README.md</div>
+        <p class="desc">Visao geral do projeto e instrucao de abertura local.</p>
+        <a class="btn" href="./README.md" download="README.md">Baixar arquivo</a>
+      </div>
+
+      <div class="card">
+        <div class="name">HANDOFF.md</div>
+        <p class="desc">Guia de continuidade segura para outro agente.</p>
+        <a class="btn" href="./HANDOFF.md" download="HANDOFF.md">Baixar arquivo</a>
+      </div>
+
+      <div class="card">
+        <div class="name">CHANGELOG.md</div>
+        <p class="desc">Resumo das evolucoes consolidadas desta base.</p>
+        <a class="btn" href="./CHANGELOG.md" download="CHANGELOG.md">Baixar arquivo</a>
+      </div>
+
+      <div class="card">
+        <div class="name">.gitignore</div>
+        <p class="desc">Ignore basico para sistema e editores.</p>
+        <a class="btn" href="./.gitignore" download=".gitignore">Baixar arquivo</a>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
